@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+   <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>StockMarket App</title>
+    <style>
+        .card{
+            padding:30px;
+        }
+    </style>
+  </head>
+  <body style="padding-top:50px;">
+      <div id="app"></div>
+     
+    <script type="text/babel">
+        class App extends React.Component{
+          state = {
+              company_1:"",
+              company_2:"",
+              company_3:""
+          }
+          calc = (e) => {
+              e.preventDefault();
+              console.log("works");
+          }
+            render(){
+                return(
+                    <div className="container">
+                      <center>
+                            <div className="card">
+                                <center><h4>Stock Compare</h4></center><br></br>
+                                <form onSubmit={this.calc}>
+                                    <input type="text" onChange={(e)=>{this.setState({company_1:e.target.value})}} name="companyone"  className="form-control" placeholder="First Company"/><br></br>
+                                    <input type="text" onChange={(e)=>{this.setState({company_1:e.target.value})}} name="companyone" className="form-control" placeholder="Second Company"/><br></br>
+                                    <input type="text" onChange={(e)=>{this.setState({company_1:e.target.value})}} name="companyone" className="form-control" placeholder="Third Company"/><br></br>
+                                    <input type="submit" value="Compare" className="btn btn-outline-danger"/>
+                                </form>    
+                            </div>
+                      </center>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(
+        <App/>,
+        document.getElementById('app')
+        );
+    </script>
+  </body>
+</html>
