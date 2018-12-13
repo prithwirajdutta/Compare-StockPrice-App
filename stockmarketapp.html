@@ -23,26 +23,31 @@
     <script type="text/babel">
         class App extends React.Component{
           state = {
-              company_1:"",
-              company_2:"",
-              company_3:""
+              company_code:"",
           }
           calc = (e) => {
-              e.preventDefault();
-              console.log("works");
+                 e.preventDefault();
+                 const com_code = e.target.elements.companycode.value;
+               fetch(`https://api.iextrading.com/1.0/stock/${com_code}/chart/5y`)
+                .then(res=>res.json())
+                .then(data => {
+                                    console.log(data)
+                              })
+                .catch(err => {console.log(err)});
+                console.log(com_code);
           }
             render(){
                 return(
                     <div className="container">
                       <center>
                             <div className="card">
-                                <center><h4>Stock Compare</h4></center><br></br>
+                                <center><h4>Visualize Stock Price</h4></center><br></br>
                                 <form onSubmit={this.calc}>
-                                    <input type="text" onChange={(e)=>{this.setState({company_1:e.target.value})}} name="companyone"  className="form-control" placeholder="First Company"/><br></br>
-                                    <input type="text" onChange={(e)=>{this.setState({company_1:e.target.value})}} name="companyone" className="form-control" placeholder="Second Company"/><br></br>
-                                    <input type="text" onChange={(e)=>{this.setState({company_1:e.target.value})}} name="companyone" className="form-control" placeholder="Third Company"/><br></br>
+                                    <input type="text" onChange={(e)=>{this.setState({company_1:e.target.value})}} name="companycode"  className="form-control" placeholder="Enter Company Code"/><br></br>
                                     <input type="submit" value="Compare" className="btn btn-outline-danger"/>
                                 </form>    
+                                <br></br><hr></hr> <br></br>
+                                <h1>{this.state.company_code}</h1>
                             </div>
                       </center>
                     </div>
