@@ -24,14 +24,22 @@
         class App extends React.Component{
           state = {
               company_code:"",
+              high:""
           }
           calc = (e) => {
                  e.preventDefault();
+                 var j = 0;
                  const com_code = e.target.elements.companycode.value;
                fetch(`https://api.iextrading.com/1.0/stock/${com_code}/chart/5y`)
                 .then(res=>res.json())
                 .then(data => {
-                                    console.log(data)
+                                   for(let i=0;i<data.length;i++)
+                                    {
+                                         this.setState({
+                                             high:data[i].high
+                                         })
+                                         console.log(data[i].high+" "+data[i].date)
+                                    }
                               })
                 .catch(err => {console.log(err)});
                 console.log(com_code);
@@ -47,7 +55,7 @@
                                     <input type="submit" value="Compare" className="btn btn-outline-danger"/>
                                 </form>    
                                 <br></br><hr></hr> <br></br>
-                                <h1>{this.state.company_code}</h1>
+                                <h1>{this.state.high}</h1>
                             </div>
                       </center>
                     </div>
